@@ -17,7 +17,7 @@ end
 20.times do |n|
   name = "dinner-#{n+1}"
   host_id = rand(1..5)
-  date = Time.now + n.days
+  date = Time.now
   venue = Faker::Address.street_address
   num_guests = rand(4..10)
   cuisine = 'local'
@@ -37,5 +37,16 @@ end
                dessert_course:  dessert_course,
                cost_per_pax:    cost_per_pax,
                picture:         picture )
+
+end
+
+
+200.times do |n|
+  event_id = n%20+1
+  guest_id = n%95+1
+  accepted = false
+  Signup.create!(event_id:    event_id,
+               guest_id:      guest_id,
+               accepted:      accepted)
 
 end
