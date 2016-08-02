@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  host_id: 1
+  date: 2016-08-02
+  venue: MyText
+  num_guests: 1
+  cuisine: MyText
+  first_course: MyText
+  main_course: MyText
+  dessert_course: MyText
+  cost_per_pax: 1.5
+  picture: MyString
+
+two:
+  name: MyText
+  host_id: 1
+  date: 2016-08-02
+  venue: MyText
+  num_guests: 1
+  cuisine: MyText
+  first_course: MyText
+  main_course: MyText
+  dessert_course: MyText
+  cost_per_pax: 1.5
+  picture: MyString
