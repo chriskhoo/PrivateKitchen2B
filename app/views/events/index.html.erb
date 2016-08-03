@@ -1,0 +1,28 @@
+<% provide(:title, 'Event listing') %>
+<h1>Event listing</h1>
+
+<%= will_paginate %>
+
+<ul class="events">
+  <% @events.each do |event| %>
+    <li>
+      <%= image_tag(event.picture, alt: "Event picture", class: "gravatar") %>
+        <div>
+          <h3>
+            <%= link_to event.name.upcase, event %>  by <%= link_to event.host.name, user_path(User.find(event.host_id)) %>
+          </h3>
+          <p>
+            <%= event.cuisine.titlecase %> Cuisine on <%= event.date %> || $ <%= event.cost_per_pax %> per guest
+          </p>
+          <% if event.host_id == session[:user_id] %>
+          <p>
+            <%= link_to "edit", edit_event_path(event) %> |
+            <%= link_to "delete", event, method: :delete, data: { confirm: "You sure?" } %>
+          </p>
+          <% end %>
+        </div>
+    </li>
+  <% end %>
+</ul>
+
+<%= will_paginate %>

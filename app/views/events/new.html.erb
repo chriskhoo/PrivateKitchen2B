@@ -1,0 +1,42 @@
+<% provide(:title, 'New event') %>
+<h1>Create a new event!</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@event) do |f| %>
+      <%#= render 'shared/error_messages' %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.label :date %>
+      <%= f.date_field :date, class: 'form-control' %>
+
+      <%= f.label :venue %>
+      <%= f.text_field :venue, class: 'form-control' %>
+
+      <%= f.label :num_guests, "Number of Guests"  %>
+      <%= f.number_field :num_guests, class: 'form-control' %>
+
+      <%= f.label :cuisine %>
+      <%= f.text_field :cuisine, class: 'form-control' %>
+
+      <%= f.label :first_course, "Starters" %>
+      <%= f.text_field :first_course, class: 'form-control' %>
+
+      <%= f.label :main_course, "Mains" %>
+      <%= f.text_field :main_course, class: 'form-control' %>
+
+      <%= f.label :dessert_course, "Dessert" %>
+      <%= f.text_field :dessert_course, class: 'form-control' %>
+
+      <%= f.label :cost_per_pax, "Costs ($ per guest)" %>
+      <%= f.text_field :cost_per_pax, class: 'form-control', value: number_with_precision(f.object.cost_per_pax, :precision => 2) || 0 %>
+
+      <%= f.label :picture %>
+      <%= f.text_field :picture, class: 'form-control' %>
+
+      <%= f.submit "Create my event!", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

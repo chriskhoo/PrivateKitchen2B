@@ -15,7 +15,7 @@ User.create!(name:  "Example User",
 end
 
 20.times do |n|
-  name = "dinner-#{n+1}"
+  name = "Dinner-#{n+1}"
   host_id = rand(1..5)
   date = Time.now
   venue = Faker::Address.street_address
@@ -25,7 +25,9 @@ end
   main_course = Faker::Team.creature
   dessert_course = Faker::Beer.style
   cost_per_pax = Faker::Commerce.price
-  picture = Faker::Placeholdit.image("50x50", 'jpg')
+  pictureBank = ["http://placekitten.com/50/50", "https://unsplash.it/50", "https://placebear.com/50/50", "http://stevensegallery.com/50/50", "http://placebeard.it/50/50", "http://fillmurray.com/50/50", "http://www.placecage.com/c/50/50", "http://www.placecage.com/50/50", "http://www.placecage.com/g/50/50"]
+  picture = pictureBank[n%9]
+
   Event.create!(name:           name,
                host_id:         host_id,
                date:            date,
@@ -36,7 +38,7 @@ end
                main_course:     main_course,
                dessert_course:  dessert_course,
                cost_per_pax:    cost_per_pax,
-               picture:         picture )
+               picture:         picture)
 
 end
 

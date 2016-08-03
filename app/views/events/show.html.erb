@@ -1,0 +1,70 @@
+<% provide(:title, @event.name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <%= image_tag(@event.picture, alt: "Event picture", class: "gravatar") %>
+      <h1>
+        <%= @event.name %>
+      </h1>
+      <p>
+        <%= @event.date %>
+      </p>
+      <ul>
+        <li>
+          Cuisine: <%= @event.cuisine %>
+        </li>
+        <li>
+          Host: <%= @event.host.name %>
+        </li>
+        <li>
+          Venue: <%= @event.venue %>
+        </li>
+        <li>
+          Number of guests: <%= @event.num_guests %>
+        </li>
+        <li>
+          Starters: <%= @event.first_course %>
+        </li>
+        <li>
+          Mains: <%= @event.main_course %>
+        </li>
+        <li>
+          Dessert: <%= @event.dessert_course %>
+        </li>
+        <li>
+          Cost per guest: $<%= @event.cost_per_pax %>
+        </li>
+        <% if @event.host_id == session[:user_id] %>
+        <li>
+          <%= link_to "edit", edit_event_path(@event) %> |
+          <%= link_to "delete", @event, method: :delete, data: { confirm: "You sure?" } %>
+        </li>
+        <% end %>
+      </ul>
+    </section>
+  </aside>
+</div>
+
+<%= render 'sign_me_up_form'%>
+
+<% unless @guests.blank? %>
+<h3>Guests Confirmed</h3>
+<ul class="events">
+  <% @guests.each do |guest| %>
+    <li>
+        <%= link_to guest.name, guest %>
+    </li>
+  <% end %>
+</ul>
+<% end %>
+
+<% unless @guests.blank? %>
+<h3>Guests Signed Up</h3>
+<ul class="events">
+  <% @guests.each do |guest| %>
+    <li>
+        <%= link_to guest.name, guest %>
+    </li>
+  <% end %>
+</ul>
+<% end %>
