@@ -6,8 +6,4 @@ class Signup < ApplicationRecord
   validates :guest_id, presence: true
   validates :accepted, default: false
 
-
-  def requested?(user_id)
-    guest_id.include?(user_id)
-  end
 end

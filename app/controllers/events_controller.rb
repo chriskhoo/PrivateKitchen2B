@@ -11,7 +11,10 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @signup = Signup.new
+    @signup_list = Signup.where(event_id: params[:id])
     @guests = event_guests
+    @requested_ans = requested?
   end
 
   def edit
@@ -59,6 +62,11 @@ class EventsController < ApplicationController
       event_signups = Event.find(params[:id]).signups
       event_guest_ids = event_signups.map(&:guest_id)
       User.find(event_guest_ids)
+    end
+
+    def requested?
+      event_guest_ids = Signup.where(event_id: params[:id]).map(&:guest_id)
+      event_guest_ids.include?(session[:user_id])
     end
 
 end

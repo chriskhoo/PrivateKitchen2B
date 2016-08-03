@@ -10,5 +10,5 @@ class Event < ApplicationRecord
   validates :cuisine,       presence: true
   validates :cost_per_pax,  presence: true
 
-
+  
 end
