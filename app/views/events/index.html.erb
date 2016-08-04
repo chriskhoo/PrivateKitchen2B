@@ -15,34 +15,19 @@
 <table>
   <thead>
     <tr>
-      <th>
-        Picture
-      </th>
-      <th>
-        Event
-      </th>
-      <th>
-        Host
-      </th>
-      <th>
-        Cuisine
-      </th>
-      <th>
-        Date
-      </th>
-      <th>
-        Price
-      </th>
-      <th>
-        Status
-      </th>
-      <th>
-        Actions
-      </th>
+      <th> Picture                                      </th>
+      <th> <%= sortable "name","Event" %>               </th>
+      <th> <%= sortable "host_id", "Host" %>            </th>
+      <th> <%= sortable "cuisine" %>                    </th>
+      <th> <%= sortable "date" %>                       </th>
+      <th> <%= sortable "cost_per_pax", "Price" %>      </th>
+      <th> Status                                       </th>
+      <th> Actions                                      </th>
     </tr>
   </thead>
   <tbody>
     <% @events.each do |event| %>
+    <% status = event.event_status(session[:user_id]) %>
     <tr>
         <td>
           <%= image_tag(event.picture, alt: "Event picture", class: "gravatar") %>
@@ -62,9 +47,27 @@
         <td>
           $ <%= number_with_precision(event.cost_per_pax, precision: 2) %>
         </td>
-        <td>
-          <%= event.event_status(session[:user_id]) %>
-        </td>
+        <% if status == "Waitlisted" %>
+          <td class = "waitlisted">
+            <%= status %>
+          </td>
+        <% elsif status == "Open" %>
+          <td class = "open">
+            <%= status %>
+          </td>
+        <% elsif status == "Host" %>
+          <td class = "host">
+            <%= status %>
+          </td>
+        <% elsif status == "Full" %>
+          <td class = "full">
+            <%= status %>
+          </td>
+        <% else status == "Confirmed" %>
+          <td class = "confirmed">
+            <%= status %>
+          </td>
+        <% end %>
         <% if event.host_id == session[:user_id] %>
         <td>
           <%= link_to "edit", edit_event_path(event) %> |

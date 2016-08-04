@@ -1,14 +1,42 @@
-<div class="center jumbotron">
-  <h1>Welcome to the Sample App</h1>
-
-  <h2>
-    This is the home page for the
-    <a href="http://www.railstutorial.org/">Ruby on Rails Tutorial</a>
-    sample application.
-  </h2>
-
-  <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <h1>Welcome <%= @user.name %></h1>
+      <h2>EAT COOK HOST with GUESTRONOMY</h2>
+    </div>
+  </div>
 </div>
-
-<%= link_to image_tag("rails.png", alt: "Rails logo"),
-            'http://rubyonrails.org/' %>
+<div class="container">
+  <div class="row stylish-panel">
+    <div class="col-md-4">
+      <div>
+        <img src="http://barnatanko.com/wp-content/uploads/2015/07/MG_2243-200x200.jpg" alt="Texto Alternativo" class="img-circle img-thumbnail">
+        <h2>Hosted Events</h2>
+        <% if @my_hosted_events.any?
+        @my_hosted_events.each do |event| %>
+        <p> <%= link_to event.name.upcase, event %> | <%= event.date %> </p>
+        <% end end %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div>
+        <img src="https://s-media-cache-ak0.pinimg.com/236x/02/a4/b6/02a4b6bd0a30bc2e5c24f4ed3d81e17d.jpg" alt="Texto Alternativo" class="img-circle img-thumbnail">
+        <h2>Confirmed Events</h2>
+        <% if @my_accepted_events.any?
+        @my_accepted_events.each do |event| %>
+        <p> <%= link_to event.name.upcase, event %> | <%= event.date %> </p>
+        <% end end %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div>
+        <img src="http://www.jmcutlery.com/store/catalog/images/tls/23863_small.jpg" alt="Texto Alternativo" class="img-circle img-thumbnail">
+        <h2>Waitlisted Events</h2>
+        <% if @my_waitlisted_events.any?
+          @my_waitlisted_events.each do |event| %>
+        <p> <%= link_to event.name.upcase, event %> | <%= event.date %> </p>
+        <% end end %>
+      </div>
+    </div>
+  </div>
+</div>

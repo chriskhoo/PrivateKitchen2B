@@ -1,4 +1,5 @@
 class Event < ApplicationRecord
+  include Filterable
   belongs_to  :host, class_name: "User"
   has_many    :signups, dependent: :destroy
 

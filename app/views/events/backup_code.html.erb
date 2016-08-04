@@ -1,0 +1,12 @@
+<%= form_for(params[:search], url: events_path, html: { method: :get }) do |f| %>
+<tr>
+  <th>     </th>
+  <th> <%= f.text_field :name, class: 'form-control' %>    </th>
+  <th> <%= f.text_field :host_id, class: 'form-control' %>    </th>
+  <th> <%= f.text_field :cuisine, class: 'form-control' %>    </th>
+  <th> <%= f.text_field :date, class: 'form-control' %>    </th>
+  <th> <%= f.text_field :cost_per_pax, class: 'form-control' %>    </th>
+  <th>     </th>
+  <th> <%= f.submit "Search", class: "btn btn-primary" %>   </th>
+</tr>
+<% end %>

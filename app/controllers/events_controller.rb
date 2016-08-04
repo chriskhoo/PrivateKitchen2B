@@ -1,8 +1,11 @@
 class EventsController < ApplicationController
+  helper_method :sort_column, :sort_direction
   before_action :host_user,     only: :edit
 
   def index
-    @events = Event.paginate(page: params[:page], per_page: 10)
+    @events = Event.order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
+    #
+    # .filter(params.slice(:name, :host_id, :date, :cuisine, :cost_per_pax))
   end
 
   def new
@@ -84,6 +87,13 @@ class EventsController < ApplicationController
       Event.find(params[:id]).num_guests - num_guests_approved
     end
 
+    def sort_column
+      Event.column_names.include?(params[:sort]) ? params[:sort] : "date"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
 
 
 end
