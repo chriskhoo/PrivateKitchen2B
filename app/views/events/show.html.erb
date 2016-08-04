@@ -1,6 +1,6 @@
 <% provide(:title, @event.name) %>
 <div class="row">
-    <aside class="col-md-4">
+    <aside class="col-md-12">
         <section class="user_info">
             <%= image_tag(@event.picture, alt: "Event picture", class: "gravatar") %>
             <h1>
@@ -39,7 +39,7 @@
                     <%= @event.dessert_course %>
                 </li>
                 <li>
-                    Cost per guest: $<%= @event.cost_per_pax %>
+                    Cost per guest: $<%= number_with_precision(@event.cost_per_pax, precision: 2) %>
                 </li>
                 <% if @event.host_id == session[:user_id] %>
                 <li>
@@ -55,8 +55,8 @@
 
 <%= render 'sign_me_up_form'%>
 
+<h3> Guests confirmed - <%= @num_guests_approved %>/<%= @event.num_guests %> </h3>
 <% if @signup_list.map(&:accepted).include?(true) %>
-<h3>Guests who have been confirmed</h3>
 <ul class="events">
     <% @guests.each do |guest|
     if @signup_list.find_by(guest_id: guest.id).accepted %>
@@ -68,14 +68,15 @@
 </ul>
 <% end %>
 
-<% if @signup_list.map(&:accepted).include?(false) %>
-<h3>Guests Signed Up</h3>
+<% if @event.host_id == session[:user_id] && @signup_list.map(&:accepted).include?(false) %>
+<h3> <%= pluralize(@guests_waiting, "Guest") %> would like to attend -  <%= pluralize(@num_seats_remaining, "seat") %>  remaining</h3>
 <ul class="events">
     <% @guests.each do |guest| %>
     <% @signup_line = @signup_list.find_by(guest_id: guest.id) %>
     <% unless @signup_line.accepted %>
     <li>
         <%= link_to guest.name, guest , class: "inline-button"%>
+        <% if @num_seats_remaining > 0 %>
         <div class="inline-button">
             <%= form_for(@signup_line, url: invitation_accept_path(@signup_line)) do |f| %>
             <%= hidden_field_tag :signup_id, @signup_line.id %>
@@ -83,6 +84,7 @@
             <%= f.submit value: "Accept" ,class: "inline-button" %>
             <% end %>
         </div>
+        <% end %>
     </li>
     <% end %>
     <% end %>

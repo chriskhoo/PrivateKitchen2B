@@ -1,9 +1,15 @@
 <% unless @event.host_id == session[:user_id] %>
-  <div id="sign_me_up_form">
-  <% if @requested_ans %>
+<div class="row">
+  <div id="sign_me_up_form" class="col-md-12">
+    <% if @requested_ans && @signup_list.find_by(guest_id: session[:user_id]).accepted %>
+    <%= render 'invite_request_approved' %>
+    <% elsif @num_seats_remaining < 1 %>
+    <%= render 'event_full' %>
+    <% elsif @requested_ans %>
     <%= render 'repeal_invite_request' %>
-  <% else %>
+    <% else %>
     <%= render 'send_invite_request' %>
-  <% end %>
+    <% end %>
   </div>
+</div>
 <% end %>

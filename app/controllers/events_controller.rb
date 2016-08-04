@@ -15,6 +15,9 @@ class EventsController < ApplicationController
     @signup_list = Signup.where(event_id: params[:id])
     @guests = event_guests
     @requested_ans = requested?
+    @num_guests_approved = num_guests_approved
+    @num_seats_remaining = num_seats_remaining
+    @guests_waiting = @signup_list.count - @num_guests_approved
   end
 
   def edit
@@ -67,6 +70,18 @@ class EventsController < ApplicationController
     def requested?
       event_guest_ids = Signup.where(event_id: params[:id]).map(&:guest_id)
       event_guest_ids.include?(session[:user_id])
+    end
+
+    def num_guests_approved
+      # reference signup table for this event
+      # check approved column and count number of trues
+      Event.find(params[:id]).signups.where(accepted: true).count
+    end
+
+    def num_seats_remaining
+      # reference signup table for this event
+      # check approved column and count number of trues
+      Event.find(params[:id]).num_guests - num_guests_approved
     end
 
 end

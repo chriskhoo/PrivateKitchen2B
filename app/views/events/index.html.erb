@@ -1,5 +1,14 @@
 <% provide(:title, 'Event listing') %>
+
+
 <h1>Event listing</h1>
+<div class="row">
+  <div id="sign_me_up_form" class="col-md-12">
+    <form action= <%= new_event_path %> >
+      <input type="submit" value="Create Event" class = "btn btn-primary col-md-12">
+    </form>
+  </div>
+</div>
 
 <%= will_paginate %>
 
@@ -12,8 +21,9 @@
             <%= link_to event.name.upcase, event %>  by <%= link_to event.host.name, user_path(User.find(event.host_id)) %>
           </h3>
           <p>
-            <%= event.cuisine.titlecase %> Cuisine on <%= event.date %> || $ <%= event.cost_per_pax %> per guest
+            <%= event.cuisine.titlecase %> Cuisine on <%= event.date %> || $ <%= number_with_precision(event.cost_per_pax, precision: 2) %> per guest
           </p>
+
           <% if event.host_id == session[:user_id] %>
           <p>
             <%= link_to "edit", edit_event_path(event) %> |
