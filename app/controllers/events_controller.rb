@@ -84,4 +84,6 @@ class EventsController < ApplicationController
       Event.find(params[:id]).num_guests - num_guests_approved
     end
 
+
+
 end

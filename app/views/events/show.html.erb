@@ -79,8 +79,8 @@
         <% if @num_seats_remaining > 0 %>
         <div class="inline-button">
             <%= form_for(@signup_line, url: invitation_accept_path(@signup_line)) do |f| %>
-            <%= hidden_field_tag :signup_id, @signup_line.id %>
-            <%= hidden_field_tag :accept_request, true %>
+            <%= hidden_field_tag 'signup[id]', @signup_line.id %>
+            <%= hidden_field_tag 'signup[accepted]', true %>
             <%= f.submit value: "Accept" ,class: "inline-button" %>
             <% end %>
         </div>

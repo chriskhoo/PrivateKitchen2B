@@ -12,27 +12,68 @@
 
 <%= will_paginate %>
 
-<ul class="events">
-  <% @events.each do |event| %>
-    <li>
-      <%= image_tag(event.picture, alt: "Event picture", class: "gravatar") %>
-        <div>
-          <h3>
-            <%= link_to event.name.upcase, event %>  by <%= link_to event.host.name, user_path(User.find(event.host_id)) %>
-          </h3>
-          <p>
-            <%= event.cuisine.titlecase %> Cuisine on <%= event.date %> || $ <%= number_with_precision(event.cost_per_pax, precision: 2) %> per guest
-          </p>
-
-          <% if event.host_id == session[:user_id] %>
-          <p>
-            <%= link_to "edit", edit_event_path(event) %> |
-            <%= link_to "delete", event, method: :delete, data: { confirm: "You sure?" } %>
-          </p>
-          <% end %>
-        </div>
-    </li>
-  <% end %>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>
+        Picture
+      </th>
+      <th>
+        Event
+      </th>
+      <th>
+        Host
+      </th>
+      <th>
+        Cuisine
+      </th>
+      <th>
+        Date
+      </th>
+      <th>
+        Price
+      </th>
+      <th>
+        Status
+      </th>
+      <th>
+        Actions
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @events.each do |event| %>
+    <tr>
+        <td>
+          <%= image_tag(event.picture, alt: "Event picture", class: "gravatar") %>
+        </td>
+        <td>
+          <%= link_to event.name.upcase, event %>
+        </td>
+        <td>
+          <%= link_to event.host.name, user_path(User.find(event.host_id)) %>
+        </td>
+        <td>
+          <%= event.cuisine.titlecase %>
+        </td>
+        <td>
+          <%= event.date %>
+        </td>
+        <td>
+          $ <%= number_with_precision(event.cost_per_pax, precision: 2) %>
+        </td>
+        <td>
+          <%= event.event_status(session[:user_id]) %>
+        </td>
+        <% if event.host_id == session[:user_id] %>
+        <td>
+          <%= link_to "edit", edit_event_path(event) %> |
+          <%= link_to "delete", event, method: :delete, data: { confirm: "You sure?" } %>
+        </td>
+        <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= will_paginate %>
