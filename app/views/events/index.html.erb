@@ -12,7 +12,7 @@
 
 <%= will_paginate %>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th> Picture                                      </th>
@@ -70,8 +70,8 @@
         <% end %>
         <% if event.host_id == session[:user_id] %>
         <td>
-          <%= link_to "edit", edit_event_path(event) %> |
-          <%= link_to "delete", event, method: :delete, data: { confirm: "You sure?" } %>
+            &nbsp <a href="/events/<%=event.id%>/edit"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> </a> &nbsp;&nbsp
+          <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/events/<%=event.id%>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> &nbsp
         </td>
         <% end %>
     </tr>

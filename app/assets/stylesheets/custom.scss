@@ -71,6 +71,7 @@ p {
   text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
+  padding-left: 45px;
   font-weight: bold;
   &:hover {
     color: white;
@@ -119,6 +120,9 @@ footer {
 aside {
   section.user_info {
     margin-top: 20px;
+    img {
+      border-radius: 100%;
+    }
   }
   section {
     padding: 10px 0;
@@ -270,4 +274,18 @@ th .current {
     -o-transform: rotate(360deg);
     -ms-transform: rotate(360deg);
     transform: rotate(360deg);
+}
+
+.logo{
+  display: inline;
+  position: absolute;
+  padding: 5px;
+}
+
+tbody tr td img{
+  border-radius: 100%;
+}
+
+.table tbody tr td{
+  vertical-align: middle;
 }

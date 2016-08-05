@@ -14,6 +14,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @host = User.find(@event.host_id)
     @signup = Signup.new
     @signup_list = Signup.where(event_id: params[:id])
     @guests = event_guests
