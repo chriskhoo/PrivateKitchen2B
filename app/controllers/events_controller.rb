@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   helper_method :sort_column, :sort_direction
-  before_action :host_user,     only: :edit
+  before_action :host_user,                       only: :edit
+  before_action :logged_in_user
 
   def index
     @events = Event.order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)

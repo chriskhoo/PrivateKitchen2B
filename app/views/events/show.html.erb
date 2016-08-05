@@ -25,13 +25,13 @@
           </div>
           <div class="list-group">
               <a href="#" class="list-group-item">
-                  <span class="label label-danger pull-right"><%= @event.date %></span>
+                  <span class="label label-primary pull-right"><%= @event.date %></span>
                   <em class="fa fa-fw fa-folder-open-o text-muted"></em>Date</a>
               <a href="#" class="list-group-item">
-                  <span class="label label-danger pull-right"><%= @event.num_guests %></span>
+                  <span class="label label-primary pull-right"><%= @event.num_guests %></span>
                   <em class="fa fa-fw fa-clock-o text-muted"></em>Number of guests</a>
               <a href="#" class="list-group-item">
-                  <span class="label label-danger pull-right">$<%= number_with_precision(@event.cost_per_pax, precision: 2) %></span>
+                  <span class="label label-primary pull-right">$<%= number_with_precision(@event.cost_per_pax, precision: 2) %></span>
                   <em class="fa fa-fw fa-user text-muted"></em>Cost per guest</a>
           </div>
           <div class="row">

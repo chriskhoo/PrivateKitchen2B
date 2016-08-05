@@ -282,10 +282,19 @@ th .current {
   padding: 5px;
 }
 
+/* Event index Page */
 tbody tr td img{
   border-radius: 100%;
+  width: 10vw;
 }
 
 .table tbody tr td{
   vertical-align: middle;
 }
+
+// .navbar-inverse {
+//   background-color: darken($brand-primary, 10%);
+// }
+// .navbar-inverse .navbar-nav > li > a{
+//   color: lighten($brand-primary, 30%);
+// }
