@@ -1,5 +1,5 @@
 <% provide(:title, @event.name) %>
-<div class="container" style="padding-top: 60px;">
+<div class="container">
   <h1 class="page-header"><%= @event.name %></h1>
   <div class="row">
     <aside class="col-md-4">
@@ -58,7 +58,7 @@
           <% end %>
       </section>
     </aside>
-    <main class="col-md-8">
+    <main class="col-md-6 col-md-offset-1">
       <div class="row">
         <%= render 'sign_me_up_form'%>
       </div>
